@@ -39,20 +39,22 @@ module RequirejsHelper
           run_config[:priority].concat _priority
         end
         if Rails.application.config.assets.digest
-          modules = requirejs.build_config['modules'].map { |m| requirejs.module_name_for m }
+          # modules = requirejs.build_config['modules'].map { |m| requirejs.module_name_for m }
 
-          # Generate digestified paths from the modules spec
-          paths = {}
-          modules.each { |m| paths[m] = _javascript_path(m).sub /\.js$/,'' }
+          # # Generate digestified paths from the modules spec
+          # paths = {}
+          # modules.each { |m| paths[m] = _javascript_path(m).sub /\.js$/,'' }
 
-          if run_config.has_key? 'paths'
-            # Add paths for assets specified by full URL (on a CDN)
-            run_config['paths'].each { |k,v| paths[k] = v if v =~ /^https?:/ }
-          end
+          # if run_config.has_key? 'paths'
+          #   # Add paths for assets specified by full URL (on a CDN)
+          #   run_config['paths'].each { |k,v| paths[k] = v if v =~ /^https?:/ }
+          # end
 
-          # Override user paths, whose mappings are only relevant in dev mode
-          # and in the build_config.
-          run_config['paths'] = paths
+          # # Override user paths, whose mappings are only relevant in dev mode
+          # # and in the build_config.
+          # run_config['paths'] = paths
+
+          run_config['paths'] = { name => _javascript_path(name).sub /\.js$/,'' }
         end
         html.concat <<-HTML
         <script>var require = #{run_config.to_json};</script>
