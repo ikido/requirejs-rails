@@ -54,7 +54,7 @@ module RequirejsHelper
           # # and in the build_config.
           # run_config['paths'] = paths
 
-          run_config['paths'] = { name => _javascript_path(name).sub /\.js$/,'' }
+          run_config['paths'] = { name => (_javascript_path(name).sub /\.js$/,'') }
         end
         html.concat <<-HTML
         <script>var require = #{run_config.to_json};</script>
