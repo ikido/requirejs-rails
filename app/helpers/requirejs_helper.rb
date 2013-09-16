@@ -63,7 +63,7 @@ module RequirejsHelper
         end
 
         run_config['baseUrl'] = baseUrl(name)
-        run_config['waitSeconds'] = 11
+        run_config['waitSeconds'] = 0
         html.concat <<-HTML
         <script>var require = #{run_config.to_json};</script>
         HTML
