@@ -85,6 +85,7 @@ module Requirejs::Rails
         uglify
         useStrict
         wrap
+        waitSeconds
       }
     end
 
