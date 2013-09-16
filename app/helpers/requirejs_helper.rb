@@ -41,6 +41,8 @@ module RequirejsHelper
           run_config[:priority] ||= []
           run_config[:priority].concat _priority
         end
+
+        # show only one module in production
         if Rails.application.config.assets.digest
           # modules = requirejs.build_config['modules'].map { |m| requirejs.module_name_for m }
 
@@ -61,6 +63,7 @@ module RequirejsHelper
         end
 
         run_config['baseUrl'] = baseUrl(name)
+        run_config['waitSeconds'] = 11
         html.concat <<-HTML
         <script>var require = #{run_config.to_json};</script>
         HTML
